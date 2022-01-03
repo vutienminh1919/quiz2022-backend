@@ -70,4 +70,12 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+    public function logout()
+    {
+        auth('sanctum')->user()->tokens()->delete();
+
+        return [
+            'message' => 'You have successfully logged out and the token was successfully deleted'
+        ];
+    }
 }

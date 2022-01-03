@@ -6,23 +6,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Testing\Fluent\Concerns\Has;
 
 class AuthController extends Controller
 {
 
-//    public function register(Request $request)
-//    {
-//        $request->validate([
-//            'name' => 'required',
-//            'email' => 'required',
-//            'password' => 'required|min:6|max:8',
-//        ]);
-//        $data = $request->only('name', 'email', 'password');
-//        $request['password'] = Hash::make($request->password);
-//        $user = User::query()->create($data);
-//        $user->save();
-//        return response()->json(['code' => 200, 'message' => 'Tạo tài khoản thành công ', 'data' => $data]);
-//    }
+
 
     public function login(Request $request)
     {
@@ -61,5 +50,24 @@ class AuthController extends Controller
                 'error' => $error,
             ]);
         }
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email'=> 'required|string|max:255|email',
+            'password' => 'required|string|min:8'
+        ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email'=> $request->email,
+            'password' => Hash::make($request->password)
+        ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
     }
 }

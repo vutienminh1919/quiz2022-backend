@@ -9,6 +9,8 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $table = 'questions';
+
     public function categories() {
         return $this->belongsTo(Category::class,'category_id','id');
     }

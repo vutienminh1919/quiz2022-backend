@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/html/MD5/Dự án/quiz2022-backend/project-quizz/resources/views/backend/core/footer.blade.php ENDPATH**/ ?>

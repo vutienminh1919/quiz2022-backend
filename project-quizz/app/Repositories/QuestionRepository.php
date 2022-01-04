@@ -17,12 +17,8 @@ class QuestionRepository implements Repository
     }
 
     public function create($data) {
-        $question = new Question();
-        $question->name = $data->name;
-        $question->category_id = $data->category_id;
-        $question->difficulty_id = $data->difficulty_id;
-        $question->quantity = $data->quantity;
-        $question->save();
+        $question = Question::create($data);
+        return $question;
     }
 
     public function update($data, $object) {

@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Services\Impl;
+
+
 
 use App\Repositories\CategoryRepositoryImpl;
 use App\Services\CategoryServiceImpl;
@@ -71,7 +74,7 @@ class CategoryService implements CategoryServiceImpl
         $category = $this->categoryRepository->findById($id);
 
         $statusCode = 404;
-        $message = "User not found";
+        $message = "Category not found";
         if ($category) {
             $this->categoryRepository->destroy($category);
             $statusCode = 200;

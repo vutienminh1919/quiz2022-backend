@@ -6,6 +6,7 @@ use App\Repositories\CategoryRepositoryImpl;
 use App\Repositories\Eloquent\EloquentRepository;
 use App\Repositories\Impl\CategoryRepository;
 use App\Repositories\Repository;
+
 use App\Services\CategoryServiceImpl;
 use App\Services\Impl\CategoryService;
 use Illuminate\Support\ServiceProvider;
@@ -23,7 +24,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(CategoryServiceImpl::class, CategoryService::class);
         $this->app->singleton(CategoryRepositoryImpl::class, CategoryRepository::class);
-
     }
 
     /**

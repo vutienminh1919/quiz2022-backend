@@ -44,3 +44,8 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 
+Route::get('/questions',[\App\Http\Controllers\QuestionController::class,'index'])->name('questions.index');
+Route::post('/questions',[\App\Http\Controllers\QuestionController::class,'store'])->name('questions.store');
+Route::get('/questions/{id}',[\App\Http\Controllers\QuestionController::class, 'show'])->name('questions.show');
+Route::put('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'update'])->name('questions.update');
+Route::delete('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'destroy'])->name('questions.destroy');

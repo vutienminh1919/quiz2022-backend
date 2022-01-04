@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -12,9 +13,17 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    protected $questionRepository;
+
+    public function __construct(QuestionRepository $questionRepository)
+    {
+        $this->questionRepository = $questionRepository;
+    }
+
     public function index()
     {
-        //
+        $question = $this->questionRepository->getAll();
+        return response()->json($question);
     }
 
     /**
@@ -24,26 +33,17 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $question = $this->questionRepository->create($data);
+        return response()->json($question);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Question $question)
     {
         //

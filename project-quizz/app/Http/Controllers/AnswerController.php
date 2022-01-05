@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AnswerRequest;
 use App\Models\Answer;
 
 use App\Services\CategoryServiceImpl;
@@ -30,13 +31,13 @@ class AnswerController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(AnswerRequest $request)
     {
         $answer = $this->answerService->create($request->all());
         return response()->json($answer['answer'], $answer['statusCode']);
     }
 
-    public function update(Request $request, $id)
+    public function update(AnswerRequest $request, $id)
     {
         $answer = $this->answerService->update($request->all(), $id);
         return response()->json($answer['answer'], $answer['statusCode']);

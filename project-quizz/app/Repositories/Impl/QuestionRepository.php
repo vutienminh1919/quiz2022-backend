@@ -1,36 +1,15 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Impl;
 
 use App\Models\Question;
+use App\Repositories\Eloquent\EloquentRepository;
+use App\Repositories\QuestionRepositoryImp;
 
-class QuestionRepository implements Repository
+class QuestionRepository extends EloquentRepository implements QuestionRepositoryImp
 {
-    public function getAll(){
-        $questions = Question::all();
-        return $questions;
-    }
-
-    public function findById($id) {
-        $question = Question::findOrFail($id);
-        return $question;
-    }
-
-    public function create($data) {
-        $question = Question::create($data);
-        return $question;
-    }
-
-    public function update($id, $data) {
-        $question = Question::findOrFail($id);
-        $question->name = $data->name;
-        $question->category_id = $data->category_id;
-        $question->difficulty_id = $data->difficulty_id;
-        $question->save();
-    }
-
-    public function destroy($object) {
-        $question = Question::findOrFail($object);
-        $question->delete();
+    public function getModel()
+    {
+        return Question::class;
     }
 }

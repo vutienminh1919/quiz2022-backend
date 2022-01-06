@@ -27,7 +27,7 @@ class QuestionRequest extends FormRequest
             'name' => 'required',
             'category_id' => 'required',
             'difficulty_id' => 'required',
-
+            'quantity' => 'required',
         ];
     }
 }

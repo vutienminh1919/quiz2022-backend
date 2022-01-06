@@ -5,61 +5,47 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
+use App\Services\Impl\QuestionService;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
 
-    protected $questionRepository;
+    protected $questionService;
 
-    public function __construct(QuestionRepository $questionRepository)
+    public function __construct(QuestionService $questionService)
     {
-        $this->questionRepository = $questionRepository;
+        $this->questionService = $questionService;
     }
 
     public function index()
     {
-        $question = $this->questionRepository->getAll();
-        return response()->json($question);
+        $answers = $this->questionService->getAll();
+        return response()->json($answers, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($id)
     {
+        $answer = $this->questionService->findById($id);
+        return response()->json($answer['answer'], $answer['statusCode']);
 
     }
 
     public function store(QuestionRequest $request)
     {
-        $data = $request->all();
-        $question = $this->questionRepository->create($data);
-        return response()->json($question);
+        $answer = $this->questionService->create($request->all());
+        return response()->json($answer['answer'], $answer['statusCode']);
     }
 
-
-    public function show(Question $question,$id)
+    public function update(QuestionRequest $request, $id)
     {
-        $question = $this->questionRepository->findById($id);
-        return $question;
-    }
-
-    public function edit(Question $question)
-    {
-        //
-    }
-
-    public function update($id,Request $request)
-    {
-        $question = $this->questionRepository->update($id, $request->all());
-        return $question;
+        $answer = $this->questionService->update($request->all(), $id);
+        return response()->json($answer['answer'], $answer['statusCode']);
     }
 
     public function destroy($id)
     {
-        $this->questionRepository->destroy($id);
+        $answer = $this->questionService->destroy($id);
+        return response()->json($answer['message'], $answer['statusCode']);
     }
 }

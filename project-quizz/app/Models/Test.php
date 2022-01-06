@@ -12,7 +12,7 @@ class Test extends Model
     protected $table = 'tests';
 
     public function questions() {
-        return $this->belongsToMany(Question::class,'question_test','test_id','question_id');
+        return $this->belongsToMany(Question::class,'question_test','question_id','test_id');
     }
 
     public function users() {

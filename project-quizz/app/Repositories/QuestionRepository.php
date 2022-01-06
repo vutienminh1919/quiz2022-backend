@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Answer;
 use App\Models\Question;
 
 class QuestionRepository implements Repository
@@ -10,6 +11,7 @@ class QuestionRepository implements Repository
     public function getAll()
     {
         $question = Question::all();
+        return $question;
     }
 
     public function getById($id)
@@ -19,21 +21,21 @@ class QuestionRepository implements Repository
 
     public function store($request)
     {
-        $topicID = $request->input('topic');
-        $questionText = $request->input('question');
-        $optionArray = $request->input('options');
-        $correctOptions = $request->input('correct');
+        $testID = $request->input('test');
+        $questionName = $request->input('question');
+        $optionArray[] = $request->input('options');
+        $correctOptions[] = $request->input('correct');
 
         $question = new Question();
-        $question->topic_id = $topicID;
-        $question->question_text = $questionText;
+        $question->test_id = $testID;
+        $question->question_name = $questionName;
         $question->save();
 
         $questionToAdd = Question::latest()->first();;
         $questionID = $questionToAdd->id;
 
         foreach ($optionArray as $index => $opt) {
-            $option = new Option();
+            $option = new Answer();
             $option->question_id = $questionID;
             $option->option = $opt;
             foreach ($correctOptions as $correctOption) {
@@ -43,17 +45,19 @@ class QuestionRepository implements Repository
             }
             $option->save();
         }
+        return $question;
     }
 
     public function update($id, $request)
     {
-        $topicID = $request->input('topic_id');
-        $questionText = $request->input('question_text');
+        $testID = $request->input('test');
+        $questionName = $request->input('question');
 
         $question = Question::find($id);
-        $question->topic_id = $topicID;
-        $question->question_text = $questionText;
+        $question->test_id = $testID;
+        $question->question_name = $questionName;
         $question->save();
+        return $question;
     }
 
     public function destroy($id)

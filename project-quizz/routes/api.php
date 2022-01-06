@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
-use App\Http\Controllers\CategoryController;
+
 
 
 use App\Http\Controllers\AuthController;
@@ -35,6 +35,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users',[UserController::class,'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/answers', [AnswerController::class, 'index']);
+    Route::get('/answers/{id}', [AnswerController::class, 'show']);
+    Route::post('/answers', [AnswerController::class, 'store']);
+    Route::put('/answers/{id}', [AnswerController::class, 'update']);
+    Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 });
 Route::post('/login', [AuthController::class,'login']);
@@ -57,11 +62,7 @@ Route::delete('/tests/{testId}', [TestController::class, 'destroy'])->name('test
 Route::get('/testsbyquestion/{id}', [TestController::class, 'getAllTestByQuestion']);
 Route::get('/questionsbytest/{id}', [TestController::class, 'getAllQuestionByTest']);
 
-Route::get('/answers', [AnswerController::class, 'index']);
-Route::get('/answers/{id}', [AnswerController::class, 'show']);
-Route::post('/answers', [AnswerController::class, 'store']);
-Route::put('/answers/{id}', [AnswerController::class, 'update']);
-Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
+
 
 
 

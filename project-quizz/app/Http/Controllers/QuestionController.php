@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Answer;
 use App\Models\Question;
 
@@ -25,7 +27,7 @@ class QuestionController extends Controller
         return response()->json($questions);
     }
 
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
         $question = $this->questionRepository->store($request);
         return response()->json($question);
@@ -37,7 +39,7 @@ class QuestionController extends Controller
         return response()->json($question);
     }
 
-    public function update($id,Request $request)
+    public function update($id,UpdateQuestionRequest $request)
     {
 
         $question = $this->questionRepository->update($id, $request);

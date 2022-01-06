@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @method static create(array $array)
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -41,4 +44,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tests() {
+        return $this->belongsToMany(Test::class,'test_user','user_id','test_id');
+    }
+
+    public function results() {
+        return $this->hasMany(Result::class, 'user_id', 'id');
+    }
+    public function quizCount() {
+        return $this->results()->count();
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 
 
@@ -53,6 +54,13 @@ Route::get('/questions/{id}',[\App\Http\Controllers\QuestionController::class, '
 Route::post('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'update'])->name('questions.update');
 Route::delete('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'destroy'])->name('questions.destroy');
 
+Route::get('/tests', [TestController::class, 'index'])->name('tests.all');
+Route::get('/tests/{testId}', [TestController::class, 'show'])->name('tests.show');
+Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
+Route::put('/tests/{testId}', [TestController::class, 'update'])->name('tests.update');
+Route::delete('/tests/{testId}', [TestController::class, 'destroy'])->name('tests.destroy');
+Route::get('/testsbyquestion/{id}', [TestController::class, 'getAllTestByQuestion']);
+Route::get('/questionsbytest/{id}', [TestController::class, 'getAllQuestionByTest']);
 
 Route::get('/answers', [AnswerController::class, 'index']);
 Route::get('/answers/{id}', [AnswerController::class, 'show']);

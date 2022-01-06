@@ -15,8 +15,12 @@ class CreateQuestionTestTable extends Migration
     {
         Schema::create('question_test', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('question_id')->unsigned()->nullable();
-            $table->bigInteger('test_id')->unsigned()->nullable();
+            $table->bigInteger('question_id')->unsigned()->index();
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+
+            $table->bigInteger('test_id')->unsigned()->index();
+            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -40,7 +40,6 @@ class AnswerController extends Controller
 
     public function update(AnswerRequest $request, $id)
     {
-
         $answer = $this->answerRepository->update($request, $id);
         return response()->json(['message' => ' update success', 'data'=>$answer]);
     }

@@ -21,6 +21,7 @@ class CreateUserResultTable extends Migration
             $table->bigInteger('option_id')->unsigned()->nullable();
             $table->bigInteger('test_id')->unsigned()->nullable();
             $table->timestamps();
+
         });
     }
 

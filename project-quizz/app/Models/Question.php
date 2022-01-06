@@ -10,9 +10,18 @@ class question extends Model
     use HasFactory;
     protected $table = 'questions';
 
-    public function answers() {
+
+    public function answers()
+    {
         return $this->hasMany(Answer::class, 'question_id', 'id');
     }
+//    protected $fillable = [
+//        'name',
+//        'category_id',
+//        'difficulty_id',
+//        'quantity',
+//    ];
+
 
     public function correctOptionsCount() {
         return $this->answers()->where('correct', 1 )->count();
@@ -22,8 +31,9 @@ class question extends Model
         return  $this->answers()->where('correct', 1)->get();
     }
 
-    public function test() {
-        return $this->hasOne(Test::class, 'id', 'test_id');
-    }
 
+    public function test()
+        {
+            return $this->hasOne(Test::class, 'id', 'test_id');
+        }
 }

@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
+
 
 class AuthController extends Controller
 {
@@ -72,7 +72,7 @@ class AuthController extends Controller
     }
     public function logout()
     {
-        auth('sanctum')->user()->tokens()->delete();
+        auth('sanctum')->user()->currentAccessToken()->delete();
 
         return [
             'message' => 'You have successfully logged out and the token was successfully deleted'

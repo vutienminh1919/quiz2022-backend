@@ -1,5 +1,7 @@
 <?php
+namespace App\Repositories;
 
+use App\Http\Requests\AnswerRequest;
 use App\Models\Answer;
 use Illuminate\Http\Client\Request;
 
@@ -18,13 +20,9 @@ class AnswerRepository
 
     }
 
-    public function update(Request $request, $id)
+    public function update(AnswerRequest $request, $id)
     {
-        $answer = Answer::findOrFail($id);
-        $answer->question_id = $request->input('question_id');
-        $answer->option = $request->input('option');
-        $answer->correct = $request->input('correct');
-        $answer->save();
+
     }
 
     public function destroy($id)

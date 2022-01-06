@@ -19,60 +19,60 @@ class QuestionService
     }
     public function findById($id)
     {
-        $answer = $this->questionRepository->findById($id);
+        $question = $this->questionRepository->findById($id);
 
         $statusCode = 200;
-        if (!$answer) {
+        if (!$question) {
             $statusCode = 404;
         }
 
         return [
             'statusCode' => $statusCode,
-            'answer' => $answer
+            'question' => $question
         ];
     }
 
     public function create($request)
     {
-        $answer = $this->questionRepository->create($request);
+        $question = $this->questionRepository->create($request);
 
         $statusCode = 201;
-        if (!$answer) {
+        if (!$question) {
             $statusCode = 500;
         }
 
         return [
             'statusCode' => $statusCode,
-            'answer' => $answer
+            'question' => $question
         ];
     }
 
     public function update($request, $id)
     {
-        $oldAnswer = $this->questionRepository->findById($id);
+        $oldQuestion = $this->questionRepository->findById($id);
 
-        if (!$oldAnswer) {
-            $newAnswer = null;
+        if (!$oldQuestion) {
+            $newQuestion = null;
             $statusCode = 404;
         } else {
-            $newAnswer = $this->questionRepository->update($request, $oldAnswer);
+            $newQuestion = $this->questionRepository->update($request, $oldQuestion);
             $statusCode = 200;
         }
 
         return [
             'statusCode' => $statusCode,
-            'answer' => $newAnswer
+            'question' => $newQuestion
         ];
     }
 
     public function destroy($id)
     {
-        $answer = $this->questionRepository->findById($id);
+        $question = $this->questionRepository->findById($id);
 
         $statusCode = 404;
         $message = "Answer not found";
-        if ($answer) {
-            $this->questionRepository->destroy($answer);
+        if ($question) {
+            $this->questionRepository->destroy($question);
             $statusCode = 200;
             $message = "Delete success!";
         }

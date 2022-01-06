@@ -67,3 +67,10 @@ Route::get('/answers/{id}', [AnswerController::class, 'show']);
 Route::post('/answers', [AnswerController::class, 'store']);
 Route::put('/answers/{id}', [AnswerController::class, 'update']);
 Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
+
+
+Route::get('/difficulty', [\App\Http\Controllers\DifficultyController::class, 'index']);
+Route::get('/difficulty/{id}', [DifficultyController::class, 'show']);
+Route::post('/difficulty', [DifficultyController::class, 'store']);
+Route::put('/difficulty/{id}', [DifficultyController::class, 'update']);
+Route::delete('/difficulty/{id}', [DifficultyController::class, 'destroy']);

@@ -16,15 +16,10 @@ class UpdateQuestionRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
         return [
-                'test_id' => 'required|exists:id',
+                'test_id' => 'required|exists:questions,id',
                 'question_name' => 'required',
         ];
     }

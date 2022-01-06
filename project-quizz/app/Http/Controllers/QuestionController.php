@@ -10,6 +10,7 @@ use App\Models\Question;
 
 use App\Repositories\QuestionRepository;
 
+use Cassandra\Exception\ReadTimeoutException;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -39,11 +40,14 @@ class QuestionController extends Controller
         return response()->json($question);
     }
 
-    public function update($id,UpdateQuestionRequest $request)
+    public function update(UpdateQuestionRequest $request, $id)
     {
-
-        $question = $this->questionRepository->update($id, $request);
-        return response()->json($question);
+        try {
+            $question = $this->questionRepository->update($id, $request);
+            return response()->json(["question" => $question]);
+        } catch (Exception $error) {
+            return response()->json(['error' => $error->getMessage()]);
+        }
     }
 
     public function destroy($id)

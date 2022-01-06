@@ -12,6 +12,7 @@ class Test extends Model
     protected $fillable= [
       'name', 'point'
     ];
+    protected $table = 'tests';
 
     public function questions() {
         return $this->belongsToMany(Question::class,'question_test','test_id','question_id');

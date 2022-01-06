@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryServiceImpl;
 use Illuminate\Http\Request;
 
@@ -32,14 +33,14 @@ class CategoryController extends Controller
         return response()->json($dataCategory['categories'], $dataCategory['statusCode']);
     }
 
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $dataCategory = $this->categoryService->create($request->all());
 
         return response()->json($dataCategory['categories'], $dataCategory['statusCode']);
     }
 
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $dataCategory = $this->categoryService->update($request->all(), $id);
 

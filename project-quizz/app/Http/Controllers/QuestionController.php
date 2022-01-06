@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
 use App\Models\Question;
 use App\Repositories\QuestionRepository;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     protected $questionRepository;
 
     public function __construct(QuestionRepository $questionRepository)
@@ -36,7 +33,7 @@ class QuestionController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(QuestionRequest $request)
     {
         $data = $request->all();
         $question = $this->questionRepository->create($data);
@@ -44,42 +41,25 @@ class QuestionController extends Controller
     }
 
 
-    public function show(Question $question)
+    public function show(Question $question,$id)
     {
-        //
+        $question = $this->questionRepository->findById($id);
+        return $question;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Question $question)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Question $question)
+    public function update($id,Request $request)
     {
-        //
+        $question = $this->questionRepository->update($id, $request->all());
+        return $question;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        $this->questionRepository->destroy($id);
     }
 }

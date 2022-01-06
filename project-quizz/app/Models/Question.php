@@ -10,6 +10,7 @@ class Question extends Model
     use HasFactory;
 
     protected $table = 'questions';
+
     protected $fillable = [
         'name',
         'category_id',

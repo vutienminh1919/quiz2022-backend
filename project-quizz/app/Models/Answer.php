@@ -9,7 +9,8 @@ class Answer extends Model
 {
     use HasFactory;
 
-    public function questions() {
-        return $this->belongsTo(Question::class,'question_id','id');
+    public function question()
+    {
+        return $this->hasOne(Question::class, 'id', 'question_id');
     }
 }

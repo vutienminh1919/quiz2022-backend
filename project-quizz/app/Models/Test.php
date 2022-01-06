@@ -9,11 +9,10 @@ class Test extends Model
 {
     use HasFactory;
 
-    public function questions() {
-        return $this->belongsToMany(Question::class,'question_test','test_id','question_id');
-    }
+    protected $table= 'tests';
 
-    public function users() {
-        return $this->belongsToMany(User::class,'test_user','test_id','user_id');
+    public function questions()
+    {
+        return $this->hasMany(question::class, 'test_id', 'id');
     }
 }

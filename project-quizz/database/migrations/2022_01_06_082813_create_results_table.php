@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDifficultiesTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateDifficultiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('difficulties', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('test_id')->nullable();
+            $table->unsignedBigInteger('correct_answers')->nullable();
+            $table->unsignedBigInteger('questions_count')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateDifficultiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('difficulties');
+        Schema::dropIfExists('results');
     }
 }

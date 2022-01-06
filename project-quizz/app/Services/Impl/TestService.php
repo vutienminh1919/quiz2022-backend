@@ -3,14 +3,14 @@
 namespace App\Services\Impl;
 
 use App\Models\Test;
-use App\Repositories\TestRepositoryImpl;
+use App\Repositories\TestRepository;
 use App\Services\TestServiceImpl;
 
 class TestService implements TestServiceImpl
 {
     protected $testRepository;
 
-    public function __construct(TestRepositoryImpl $testRepository)
+    public function __construct(TestRepository $testRepository)
     {
         $this->testRepository = $testRepository;
     }

@@ -35,12 +35,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users',[UserController::class,'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/categories/{categoryId}', [CategoryController::class, 'show'])->name('categories.show');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-    Route::put('/categories/{categoryId}', [CategoryController::class, 'update'])->name('categories.update');
-    Route::delete('/categories/{categoryId}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
 });
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -69,8 +64,4 @@ Route::put('/answers/{id}', [AnswerController::class, 'update']);
 Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 
-Route::get('/difficulty', [\App\Http\Controllers\DifficultyController::class, 'index']);
-Route::get('/difficulty/{id}', [DifficultyController::class, 'show']);
-Route::post('/difficulty', [DifficultyController::class, 'store']);
-Route::put('/difficulty/{id}', [DifficultyController::class, 'update']);
-Route::delete('/difficulty/{id}', [DifficultyController::class, 'destroy']);
+

@@ -15,7 +15,7 @@ class AnswerSeeder extends Seeder
     public function run()
     {
         $answer = new Answer([
-            'name' => 'a',
+            'option' => 'a',
             'question_id' => 1,
             'correct' => 1
         ],
@@ -23,21 +23,21 @@ class AnswerSeeder extends Seeder
         $answer->save();
 
         $answer = new Answer([
-            'name' => 'b',
+            'option' => 'b',
             'question_id' => 1,
         ],
         );
         $answer->save();
 
         $answer = new Answer([
-            'name' => 'c',
+            'option' => 'c',
             'question_id' => 1,
         ],
         );
         $answer->save();
 
         $answer = new Answer([
-            'name' => 'd',
+            'option' => 'd',
             'question_id' => 1,
         ],
         );

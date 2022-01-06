@@ -8,9 +8,14 @@ use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Answer;
 use App\Models\Question;
 
+
 use App\Repositories\QuestionRepository;
 
+<<<<<<< HEAD
 use Cassandra\Exception\ReadTimeoutException;
+=======
+
+>>>>>>> b61c4a7dccea4ef2c0ece9e7977189c6c2fe2a83
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller

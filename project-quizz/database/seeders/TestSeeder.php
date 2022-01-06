@@ -8,13 +8,10 @@ use Illuminate\Support\Str;
 
 class TestSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
+
         DB::table('tests')->insert(
             [
                 [
@@ -28,5 +25,6 @@ class TestSeeder extends Seeder
                 ],
             ]
         );
+
     }
 }

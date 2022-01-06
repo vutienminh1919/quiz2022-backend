@@ -2,14 +2,18 @@
 
 namespace App\Repositories;
 
+use App\Models\Answer;
 use App\Models\Question;
+
+
 
 class QuestionRepository implements Repository
 {
 
     public function getAll()
     {
-        $question = Question::all();
+        return $questions =  Question::all();
+
     }
 
     public function getById($id)
@@ -33,15 +37,15 @@ class QuestionRepository implements Repository
         $questionID = $questionToAdd->id;
 
         foreach ($optionArray as $index => $opt) {
-            $option = new Option();
-            $option->question_id = $questionID;
-            $option->option = $opt;
+            $answer = new Answer();
+            $answer->question_id = $questionID;
+            $answer->option = $opt;
             foreach ($correctOptions as $correctOption) {
                 if($correctOption == $index+1) {
-                    $option->correct = 1;
+                    $answer->correct = 1;
                 }
             }
-            $option->save();
+            $answer->save();
         }
     }
 

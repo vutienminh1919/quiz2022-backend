@@ -2,84 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
 use App\Models\Difficulty;
+use App\Services\Impl\DifficultyService;
 use Illuminate\Http\Request;
 
 class DifficultyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   protected $difficultyService;
+
+   public function __construct(DifficultyService $difficultyService)
+   {
+       $this->difficultyService = $difficultyService;
+   }
+
     public function index()
     {
-        //
+        $difficulties = $this->difficultyService->getAll();
+        return response()->json($difficulties, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $difficulty = $this->difficultyService->findById($id);
+        return response()->json($difficulty['difficulty'], $difficulty['statusCode']);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $difficulty = $this->difficultyService->create($request->all());
+        return response()->json($difficulty['difficulty'], $difficulty['statusCode']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Difficulty  $difficulty
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Difficulty $difficulty)
+    public function update(Request $request, $id)
     {
-        //
+        $difficulty = $this->difficultyService->update($request->all(), $id);
+        return response()->json($difficulty['difficulty'], $difficulty['statusCode']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Difficulty  $difficulty
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Difficulty $difficulty)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Difficulty  $difficulty
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Difficulty $difficulty)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Difficulty  $difficulty
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Difficulty $difficulty)
-    {
-        //
+        $difficulty = $this->difficultyService->destroy($id);
+        return response()->json($difficulty['message'], $difficulty['statusCode']);
     }
 }

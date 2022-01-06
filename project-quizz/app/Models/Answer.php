@@ -16,6 +16,8 @@ class Answer extends Model
         'name', 'question_id', 'correct'
     ];
 
+    protected $table = 'answers';
+
     public function questions() {
         return $this->belongsTo(Question::class,'question_id','id');
     }

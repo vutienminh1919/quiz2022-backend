@@ -62,3 +62,6 @@ Route::get('/answers/{id}', [AnswerController::class, 'show']);
 Route::post('/answers', [AnswerController::class, 'store']);
 Route::put('/answers/{id}', [AnswerController::class, 'update']);
 Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
+
+
+

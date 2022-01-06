@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class AnswerController extends Controller
 {
+
     protected $answerRepository;
 
     public function __construct(AnswerRepository $answerRepository)
@@ -40,14 +41,7 @@ class AnswerController extends Controller
     public function update(AnswerRequest $request, $id)
     {
 
-//        $this->answerRepository->update($request, $id);
-//
-//        return response()->json(['message' => ' update success']);
-        $answer = Answer::findOrFail($id);
-        $answer->question_id = $request->input('question_id');
-        $answer->option = $request->input('option');
-        $answer->correct = $request->input('correct');
-        $answer->save();
+        $answer = $this->answerRepository->update($request, $id);
         return response()->json(['message' => ' update success', 'data'=>$answer]);
     }
 
@@ -56,4 +50,5 @@ class AnswerController extends Controller
         $this->answerRepository->destroy($id);
         return response()->json(['message' => ' Delete Success']);
     }
+
 }

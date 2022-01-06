@@ -20,8 +20,11 @@ class AnswerRepository
 
     }
 
-    public function update(AnswerRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        $data = Answer::findOrFail($id);
+        $data = $request->
+
 
     }
 

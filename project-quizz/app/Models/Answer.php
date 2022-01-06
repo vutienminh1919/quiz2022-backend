@@ -13,7 +13,7 @@ class Answer extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'question_id', 'correct'
+        'option', 'question_id', 'correct'
     ];
 
     protected $table = 'answers';

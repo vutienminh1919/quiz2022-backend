@@ -11,8 +11,10 @@ class Test extends Model
 
     protected $table = 'tests';
 
+    protected $fillable = ['title'];
+
     public function questions()
     {
-        return $this->hasMany(question::class, 'test_id', 'id');
+        return $this->hasMany(Question::class, 'test_id', 'id');
     }
 }

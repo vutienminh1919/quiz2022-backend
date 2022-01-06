@@ -14,21 +14,27 @@ class TestRepository implements Repository
 
     public function getById($id)
     {
-        // TODO: Implement getById() method.
+        $test = Test::findOrFail($id);
+        return $test;
     }
 
-    public function store($data)
+    public function store($request)
     {
-        // TODO: Implement store() method.
+        $data = $request->only('title');
+        $test = Test::query()->create($data);
+        return $test;
     }
 
-    public function update($id, $data)
+    public function update($request, $id)
     {
-        // TODO: Implement update() method.
+        Test::query()->findOrFail($id);
+        $data = $request->only('title');
+        return Test::query()->where('id','=', $id)->update($data);
     }
 
     public function destroy($id)
     {
-        // TODO: Implement destroy() method.
+        $test = Test::query()->findOrFail($id);
+        $test->delete();
     }
 }

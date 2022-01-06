@@ -9,6 +9,10 @@ class Test extends Model
 {
     use HasFactory;
 
+    protected $fillable= [
+      'name', 'point'
+    ];
+
     public function questions() {
         return $this->belongsToMany(Question::class,'question_test','test_id','question_id');
     }

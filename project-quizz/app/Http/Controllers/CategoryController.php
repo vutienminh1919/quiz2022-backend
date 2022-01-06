@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use App\Services\CategoryServiceImpl;
 use Illuminate\Http\Request;
@@ -20,6 +21,9 @@ class CategoryController extends Controller
         $categories = $this->categoryService->getAll();
 
         return response()->json($categories, 200);
+
+
+
     }
 
     public function show($id)

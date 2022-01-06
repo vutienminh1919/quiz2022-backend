@@ -9,6 +9,9 @@ class Test extends Model
 {
     use HasFactory;
 
+    protected $fillable= [
+      'name', 'point'
+    ];
     protected $table = 'tests';
 
     public function questions() {

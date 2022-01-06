@@ -31,6 +31,6 @@ class Question extends Model
     }
 
     public function tests() {
-        return $this->belongsToMany(Test::class,'question_test','question_id','test_id');
+        return $this->belongsToMany(Test::class,'question_test','test_id','question_id');
     }
 }

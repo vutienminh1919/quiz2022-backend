@@ -42,8 +42,9 @@ Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
-Route::get('/questions',[\App\Http\Controllers\QuestionController::class,'index'])->name('questions.index');
+
+Route::get('/questions/{id}',[\App\Http\Controllers\QuestionController::class,'index'])->name('questions.index');
 Route::post('/questions',[\App\Http\Controllers\QuestionController::class,'store'])->name('questions.store');
 Route::get('/questions/{id}',[\App\Http\Controllers\QuestionController::class, 'show'])->name('questions.show');
-Route::put('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'update'])->name('questions.update');
+Route::post('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'update'])->name('questions.update');
 Route::delete('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'destroy'])->name('questions.destroy');

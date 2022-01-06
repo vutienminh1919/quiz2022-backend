@@ -21,8 +21,8 @@ class QuestionRepository implements Repository
         return $question;
     }
 
-    public function update($data, $object) {
-        $question = Question::findOrFail($object);
+    public function update($id, $data) {
+        $question = Question::findOrFail($id);
         $question->name = $data->name;
         $question->category_id = $data->category_id;
         $question->difficulty_id = $data->difficulty_id;

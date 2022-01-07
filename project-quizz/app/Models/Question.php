@@ -19,12 +19,7 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class, 'question_id', 'id');
     }
-//    protected $fillable = [
-//        'name',
-//        'category_id',
-//        'difficulty_id',
-//        'quantity',
-//    ];
+
 
 
     public function correctOptionsCount() {
@@ -36,8 +31,8 @@ class Question extends Model
     }
 
 
-    public function test()
+    public function tests()
         {
-            return $this->hasOne(Test::class, 'id', 'test_id');
+            return $this->belongsToMany(Test::class);
         }
 }

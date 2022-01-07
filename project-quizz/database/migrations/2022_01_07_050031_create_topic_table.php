@@ -13,7 +13,7 @@ class CreateTopicTable extends Migration
      */
     public function up()
     {
-        Schema::create('topic', function (Blueprint $table) {
+        Schema::create('topics', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
             $table->timestamps();

@@ -18,7 +18,4 @@ class Result extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function options() {
-        return $this->hasMany(UserResult::class, 'result_id', 'id');
-    }
 }

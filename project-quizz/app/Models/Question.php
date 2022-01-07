@@ -10,6 +10,10 @@ class Question extends Model
     use HasFactory;
     protected $table = 'questions';
 
+    protected $fillable = [
+      'test_id',
+      'question_name',
+    ];
 
     public function answers()
     {

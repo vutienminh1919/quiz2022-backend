@@ -25,15 +25,17 @@ class QuestionRepository implements Repository
 
     public function store($request)
     {
-        $testID = $request->input('test');
-        $questionName = $request->input('question');
+        $data = $request->all();
+
+//        $testID = $request->input('test');
+//        $questionName = $request->input('question');
         $optionArray[] = $request->input('options');
         $correctOptions[] = $request->input('correct');
 
-        $question = new Question();
-        $question->test_id = $testID;
-        $question->question_name = $questionName;
-        $question->save();
+        $question = Question::create($data);
+//        $question->test_id = $testID;
+//        $question->question_name = $questionName;
+//        $question->save();
 
         $questionToAdd = Question::latest()->first();;
         $questionID = $questionToAdd->id;
@@ -56,13 +58,12 @@ class QuestionRepository implements Repository
 
     public function update($id, $request)
     {
-        $testID = $request->input('test');
-        $questionName = $request->input('question');
+
+//        $testID = $request->input('test_id');
+//        $questionName = $request->input('question_name');
 
         $question = Question::find($id);
-        $question->test_id = $testID;
-        $question->question_name = $questionName;
-        $question->save();
+        $question->update($request->all());
         return $question;
     }
 

@@ -22,8 +22,11 @@ class AnswerController extends Controller
 
     public function index()
     {
+
         $answers = $this->answerRepository->getAll();
-        return response()->json($answers, 200);
+
+//        $question = Answer::find($answers['question_id'])->question['question_name'];
+        return response()->json( $answers, 200);
     }
 
     public function show($id)

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method static findOrFail($object)
  * @method static create($data)
+ * @method static find(int $int)
+ * @method static get()
  */
 class Answer extends Model
 {

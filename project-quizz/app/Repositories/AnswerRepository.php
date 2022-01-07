@@ -23,7 +23,7 @@ class AnswerRepository
     public function update(AnswerRequest $request, $id)
     {
         Answer::query()->findOrFail($id);
-        $data = $request->all();
+        $data = $request->only('option', 'question_id', 'correct');
         return Answer::query()->where('id','=', $id)->update($data);
 
     }

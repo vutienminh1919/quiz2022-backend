@@ -11,10 +11,14 @@ class Test extends Model
 
     protected $table = 'tests';
 
-    protected $fillable = ['title'];
+
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
 
     public function questions()
     {
-        return $this->hasMany(Question::class, 'test_id', 'id');
+        return $this->belongsToMany(Question::class);
     }
 }

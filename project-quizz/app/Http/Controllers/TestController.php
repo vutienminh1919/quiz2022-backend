@@ -32,6 +32,12 @@ class TestController extends Controller
         return response()->json($test, 200);
     }
 
+    public function getById($id)
+    {
+        $test = $this->testRepository->getById($id);
+        return response()->json($test, 200);
+    }
+
     public function update(UpdateTestRequest $request, $id)
     {
         $test= $this->testRepository->update($request, $id);

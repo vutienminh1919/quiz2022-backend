@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreTestRequest;
+use App\Http\Requests\UpdateTestRequest;
 use App\Models\Question;
 use App\Models\Test;
 
@@ -24,13 +26,19 @@ class TestController extends Controller
         return response()->json($tests, 200);
     }
 
-    public function store(Request $request)
+    public function store(StoreTestRequest $request)
     {
         $test = $this->testRepository->store($request);
         return response()->json($test, 200);
     }
 
-    public function update(Request $request, $id)
+    public function getById($id)
+    {
+        $test = $this->testRepository->getById($id);
+        return response()->json($test, 200);
+    }
+
+    public function update(UpdateTestRequest $request, $id)
     {
         $test= $this->testRepository->update($request, $id);
         return response()->json($test, 200);

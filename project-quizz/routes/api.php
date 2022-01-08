@@ -45,7 +45,8 @@ Route::put('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 
 Route::delete('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'destroy'])->name('questions.destroy');
 
 Route::get('/tests', [TestController::class, 'index'])->name('tests.all');
-Route::get('/tests/{testId}', [TestController::class, 'show'])->name('tests.show');
+Route::get('/tests/{testId}', [TestController::class, 'getById']);
+//Route::get('/tests/{testId}', [TestController::class, 'show'])->name('tests.show');
 Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
 Route::put('/tests/{testId}', [TestController::class, 'update'])->name('tests.update');
 Route::delete('/tests/{testId}', [TestController::class, 'destroy'])->name('tests.destroy');

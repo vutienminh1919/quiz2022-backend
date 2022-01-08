@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Answer;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AnswerSeeder extends Seeder
 {
@@ -14,34 +15,7 @@ class AnswerSeeder extends Seeder
      */
     public function run()
     {
-        $answer = new Answer([
-            'option' => 'a',
-            'question_id' => 1,
-            'correct' => 1
-        ],
-        );
-        $answer->save();
-
-        $answer = new Answer([
-            'option' => 'b',
-            'question_id' => 1,
-        ],
-        );
-        $answer->save();
-
-        $answer = new Answer([
-            'option' => 'c',
-            'question_id' => 1,
-        ],
-        );
-        $answer->save();
-
-        $answer = new Answer([
-            'option' => 'd',
-            'question_id' => 1,
-        ],
-        );
-        $answer->save();
+        Answer::factory()->count(10)->create();
 
     }
 }

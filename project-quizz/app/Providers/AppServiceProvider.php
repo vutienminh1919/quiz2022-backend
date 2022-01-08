@@ -2,17 +2,12 @@
 
 namespace App\Providers;
 
-use App\Repositories\CategoryRepositoryImpl;
-use App\Repositories\Eloquent\EloquentRepository;
-use App\Repositories\Impl\CategoryRepository;
-use App\Repositories\Impl\TestRepository;
-use App\Repositories\Repository;
+use App\Repositories\CategoryRepo;
+use App\Repositories\CRUDinterfaceRepo;
 
-use App\Repositories\TestRepositoryImpl;
-use App\Services\CategoryServiceImpl;
-use App\Services\Impl\CategoryService;
-use App\Services\Impl\TestService;
-use App\Services\TestServiceImpl;
+
+use App\Repositories\Eloquent\EloquentRepo;
+use App\Services\CategoryService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,13 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Repository::class, EloquentRepository::class);
+        $this->app->singleton(CRUDinterfaceRepo::class, EloquentRepo::class);
 
-        $this->app->singleton(CategoryServiceImpl::class, CategoryService::class);
-        $this->app->singleton(CategoryRepositoryImpl::class, CategoryRepository::class);
+        $this->app->singleton(CategoryService::class);
+        $this->app->singleton(CategoryRepo::class);
 
-        $this->app->singleton(TestServiceImpl::class, TestService::class);
-        $this->app->singleton(TestRepositoryImpl::class, TestRepository::class);
     }
 
     /**

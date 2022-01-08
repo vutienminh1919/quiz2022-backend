@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Question;
 use Illuminate\Database\Seeder;
 
-class QuestionSeeder extends Seeder
+class QuizQuestionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +13,6 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        Question::factory()->count(200)->create();
+        //
     }
 }

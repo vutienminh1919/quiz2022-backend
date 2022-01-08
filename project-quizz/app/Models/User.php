@@ -45,14 +45,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tests() {
-        return $this->belongsToMany(Test::class,'test_user','user_id','test_id');
-    }
 
-    public function results() {
-        return $this->hasMany(Result::class, 'user_id', 'id');
-    }
-    public function quizCount() {
-        return $this->results()->count();
-    }
 }

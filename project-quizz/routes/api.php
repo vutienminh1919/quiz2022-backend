@@ -25,12 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-//Route::get('/categories/{categoryId}', [CategoryController::class, 'show'])->name('categories.show');
-//Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-//Route::put('/categories/{categoryId}', [CategoryController::class, 'update'])->name('categories.update');
-//Route::delete('/categories/{categoryId}', [CategoryController::class, 'destroy'])->name('categories.destroy');
-//
-//Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
+
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users',[UserController::class,'index']);

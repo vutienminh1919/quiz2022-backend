@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
-use App\Http\Controllers\CategoryController;
+
 
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\QuestionController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,12 +37,13 @@ Route::post('/register', [AuthController::class, 'register']);
 
 
 
+Route::get('questions',[QuestionController::class,'index']);
+Route::get('/question/{id}', [QuestionController::class, 'show']);
+Route::post('/questions', [QuestionController::class, 'store']);
+Route::put('/questions/{id}', [QuestionController::class, 'update']);
+Route::delete('/questions/{id}', [QuestionController::class, 'destroy']);
 
-Route::get('/questions',[\App\Http\Controllers\QuestionController::class,'index'])->name('questions.index');
-Route::post('/questions',[\App\Http\Controllers\QuestionController::class,'store'])->name('questions.store');
-Route::get('/questions/{id}',[\App\Http\Controllers\QuestionController::class, 'show'])->name('questions.show');
-Route::put('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'update'])->name('questions.update');
-Route::delete('/questions/{id}', [\App\Http\Controllers\QuestionController::class, 'destroy'])->name('questions.destroy');
+
 
 Route::get('/tests', [TestController::class, 'index'])->name('tests.all');
 Route::get('/tests/{testId}', [TestController::class, 'getById']);

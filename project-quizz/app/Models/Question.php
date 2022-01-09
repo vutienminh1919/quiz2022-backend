@@ -11,8 +11,7 @@ class Question extends Model
     protected $table = 'questions';
 
     protected $fillable = [
-      'test_id',
-      'question_name',
+      'question',
     ];
 
     public function answers()

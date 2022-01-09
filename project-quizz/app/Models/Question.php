@@ -8,30 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
-    protected $table = 'questions';
+    protected $table = "questions";
 
     protected $fillable = [
       'question',
+        "question_content",
+        "difficulty"
     ];
 
     public function answers()
     {
-        return $this->hasMany(Answer::class, 'question_id', 'id');
+        return $this->hasMany(Answer::class);
     }
 
-
-
-    public function correctOptionsCount() {
-        return $this->answers()->where('correct', 1 )->count();
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
-    public function correctAnswers() {
-        return  $this->answers()->where('correct', 1)->get();
+    public function quizQuestion()
+    {
+        return $this->hasMany(QuizQuestion::class);
     }
 
-
-    public function tests()
-        {
-            return $this->belongsToMany(Test::class);
-        }
+    public function quizResults()
+    {
+        return $this->hasMany(QuizResult::class);
+    }
 }

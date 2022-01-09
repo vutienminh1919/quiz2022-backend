@@ -15,13 +15,13 @@ class TestSeeder extends Seeder
         DB::table('tests')->insert(
             [
                 [
-                    'title' => "Test 1",
+                    'test' => "Test 1",
                 ],
                 [
-                    'title' => "Test 2",
+                    'test' => "Test 2",
                 ],
                 [
-                    'title' => "Test 3",
+                    'test' => "Test 3",
                 ],
             ]
         );

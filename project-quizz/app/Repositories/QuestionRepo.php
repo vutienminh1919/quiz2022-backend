@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionRepo extends EloquentRepo implements CRUDinterfaceRepo
 {
+    public function getAll()
+    {
+        return $this->model->with('category')->get();
+    }
     public function getModel()
     {
         return Question::class;

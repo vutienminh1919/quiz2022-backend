@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Services;
 
-use App\Repositories\CRUDinterfaceRepo;
+
 use App\Repositories\QuizQuestionRepo;
+use App\Services\CRUDinterfaceService;
+use App\Services\QuestionService;
 
-class QuizQuestionService implements CRUDinterfaceRepo
+class QuizQuestionService implements CRUDInterfaceService
 {
     protected $quizQuesRepo;
     protected $questionService;
 
-    public function __construct(
-        QuizQuestionRepo $quizQuesRepo,
-        QuestionService $questionService
-    )
+    public function __construct(QuizQuestionRepo $quizQuesRepo, QuestionService $questionService)
     {
         $this->quizQuesRepo = $quizQuesRepo;
         $this->questionService = $questionService;
@@ -51,7 +50,7 @@ class QuizQuestionService implements CRUDinterfaceRepo
             if (!$oldQuestion) {
                 return 404;
             } else {
-                return  $this->quizQuesRepo->update($request, $oldQuestion);
+                return $this->quizQuesRepo->update($request, $oldQuestion);
             }
         }
     }

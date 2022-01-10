@@ -14,6 +14,6 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        Question::factory()->count(200)->create();
+        Question::factory()->count(20)->create();
     }
 }

@@ -32,8 +32,9 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = $this->questionService->getAll();
-        $categories = $this->categoryService->getAll();
-        return response()->json([$questions, $categories]);
+//        $categories = $this->categoryService->getAll();
+//        $answers = $this->answerService->getAll();
+        return response()->json($questions);
     }
     public function show($id)
     {
@@ -72,84 +73,36 @@ class QuestionController extends Controller
             return response()->json($data);
         }
 
-//        $answer_content[] = $request->answer_content;
-//        $correct_option[] = $request->corrects;
-//        if (!is_array(1, $correct_option)) {
-//            return response()->json(['message'=>'Oops! Some thing wrong", "The question needs at least one correct answer'], 404);
-//        }
-//        $question = $this->questionService->create($request->all());
-//        $answers = [];
-//        for ($i = 0; $i < count($answer_content); $i++) {
-//            $answerData = [
-//                'question_id' => $question->id,
-//                'answer_content' => $answer_content[$i],
-//                'correct' => $correct_option[$i],
-//            ];
-//            $answer = $this->answerService->create($answerData);
-//            array_push($answers, $answer);
-//        };
-//        if (!$question && !$answers) {
-//            return response()->json(['message'=>'Create question error'], 500);
-//        }
-//        return response()->json(['message'=>'Created new question']);
     }
-    public function update(UpdateQuestionsRequest $questionsRequest, $id)
+    public function update(Request $request, $id)
     {
-        $question_data = [
-            "question_content" => $questionsRequest->question_content,
-            "category_id" => $questionsRequest->category_id,
-            "difficulty" => $questionsRequest->difficulty
+
+        $question = Question::findOrFail($id);
+        $question->update($request->all());
+        foreach ($request->answers as $an){
+
+            $answer= new Answer();
+            $answer->answer_content = $an[0];
+            $answer->question_id = $question->id;
+            $answer->correct = $an[1];
+            $answer->save();
+        }
+
+        DB::commit();
+        $data = [
+            "status"=>"Success",
+            "message"=> "Sua thanh cong"
         ];
-        $this->questionService->update($question_data, $id);
-        $question = $this->questionService->findById($id);
-        $corrects = $questionsRequest->corrects;
-        $answers = $questionsRequest->answer_content;
-        $answerId = $question->answers;
 
-        if (!$answers) {
-            return response()->json(['message'=>'The question needs at least two answers.']);
-
-        }
-
-        if (count($answers) > count($answerId)) {
-            for ($i = 0; $i < count($answers); $i++) {
-                $data = [
-                    "answer_content" => $answers[$i],
-                    "correct" => $corrects[$i]
-                ];
-                $this->answerService->update($data, $answerId[$i]->id);
-                if ($i = count($answers) - 1) {
-                    $answerData = [
-                        'question_id' => $question->id,
-                        'answer_content' => $answers[$i],
-                        'correct' => $corrects[$i],
-                    ];
-                    $this->answerService->create($answerData);
-                }
-            }
-        } else {
-            for ($i = 0; $i < count($answerId); $i++) {
-                if ($i < count($answers)) {
-                    $data = [
-                        "answer_content" => $answers[$i],
-                        "correct" => $corrects[$i]
-                    ];
-                    $this->answerService->update($data, $answerId[$i]->id);
-                } else {
-                    $this->answerService->destroy($answerId[$i]->id);
-                }
-            }
-        }
-
-        return response()->json(['message'=>'Updated successfully']);
+        return response()->json($data);
     }
     public function destroy($id)
     {
-        if ($this->questionService->isQuestionUsedInQuiz($id)) {
-            return response()->json(['message'=>'Delete unavailable!Question already has used in Quiz.']);
-        } else {
+//        if ($this->questionService->isQuestionUsedInQuiz($id)) {
+//            return response()->json(['message'=>'Delete unavailable!Question already has used in Quiz.']);
+//        } else {
             $this->questionService->destroy($id);
             return response()->json(['message'=>'Delete completed']);
-        }
+//        }
     }
 }

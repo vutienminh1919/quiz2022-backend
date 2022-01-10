@@ -17,7 +17,9 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->text('question_content');
             $table->integer('difficulty')->nullable();
-            $table->integer('category_id')->unsigned();
+            $table->bigInteger('category_id')->unsigned();
+
+            $table->foreign('category_id')->references('id')->on('categories');
 
             $table->timestamps();
         });

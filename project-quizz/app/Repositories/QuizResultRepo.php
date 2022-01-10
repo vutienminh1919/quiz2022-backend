@@ -2,7 +2,13 @@
 
 namespace App\Repositories;
 
-class QuizResultRepo
-{
+use App\Models\QuizResult;
+use App\Repositories\Eloquent\EloquentRepo;
 
+class QuizResultRepo extends EloquentRepo implements CRUDinterfaceRepo
+{
+    public function getModel()
+    {
+        return QuizResult::class;
+    }
 }

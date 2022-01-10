@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AnswerController;
-use App\Http\Controllers\CategoryController;
+
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\TestController;
@@ -37,6 +38,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users',[UserController::class,'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/answers', [AnswerController::class, 'index']);
+    Route::get('/answers/{id}', [AnswerController::class, 'show']);
+    Route::post('/answers', [AnswerController::class, 'store']);
+    Route::put('/answers/{id}', [AnswerController::class, 'update']);
+    Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 });
 Route::post('/login', [AuthController::class,'login']);
@@ -56,8 +62,18 @@ Route::get('/questions/{id}',[QuestionController::class, 'show'])->name('questio
 Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
 Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
 
+//
+//Route::get('/tests', [TestController::class, 'index'])->name('tests.all');
+//Route::get('/tests/{testId}', [TestController::class, 'getById']);
+//
+//Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
+//Route::put('/tests/{testId}', [TestController::class, 'update'])->name('tests.update');
+//Route::delete('/tests/{testId}', [TestController::class, 'destroy'])->name('tests.destroy');
+//Route::get('/testsbyquestion/{id}', [TestController::class, 'getAllTestByQuestion']);
+//Route::get('/questionsbytest/{id}', [TestController::class, 'getAllQuestionByTest']);
+//
+//Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
-Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 Route::get('/quizzes', [QuizController::class, 'index']);
 Route::post('/quizzes', [QuizController::class, 'store']);

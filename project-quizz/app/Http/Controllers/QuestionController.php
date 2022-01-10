@@ -39,7 +39,7 @@ class QuestionController extends Controller
     public function show($id)
     {
         $data = $this->questionService->findById($id);
-        return response()->json($data['question'], 200);
+        return response()->json($data, 200);
     }
     public function store(Request $request)
     {

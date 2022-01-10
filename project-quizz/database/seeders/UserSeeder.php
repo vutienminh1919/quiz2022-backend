@@ -38,6 +38,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('12345678'),
             'role' => 2
         ]);
+        $user = new User([
+            'name'=>'admin',
+            'email'=>'admin@gmail.com',
+            'password' => Hash::make('12345678')
+        ]);
 
 
 

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Requests\AnswerRequest;
-use App\Models\Answer;
-
-
 use App\Repositories\AnswerRepository;
+use App\Services\AnswerService;
 use Illuminate\Http\Request;
 
 class AnswerController extends Controller
 {
+    protected $answerService;
+
 
     protected $answerRepository;
 
@@ -44,13 +43,13 @@ class AnswerController extends Controller
     public function update(AnswerRequest $request, $id)
     {
         $answer = $this->answerRepository->update($request, $id);
-        return response()->json(['message' => ' update success', 'data'=>$answer]);
+        return response()->json(['message' => ' update success', 'data' => $answer]);
     }
+
 
     public function destroy($id)
     {
-        $this->answerRepository->destroy($id);
-        return response()->json(['message' => ' Delete Success']);
+        $this->answerService->destroy($id);
+        return response()->json(['message'=>'Xóa thành công'], 200);
     }
-
 }

@@ -9,7 +9,7 @@ class Quiz extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'duration', 'question_count', 'category_id', 'description'
+        'name', 'duration', 'published'
     ];
 
     public function quizQuestions()
@@ -30,5 +30,10 @@ class Quiz extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function questions()
+    {
+        return $this->belongsToMany(Question::class, 'quiz_questions', 'quiz_id', 'question_id');
     }
 }

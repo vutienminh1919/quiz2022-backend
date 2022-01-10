@@ -32,8 +32,9 @@ class QuestionController extends Controller
     public function index()
     {
         $questions = $this->questionService->getAll();
-        $categories = $this->categoryService->getAll();
-        return response()->json([$questions, $categories]);
+//        $categories = $this->categoryService->getAll();
+//        $answers = $this->answerService->getAll();
+        return response()->json($questions);
     }
     public function show($id)
     {

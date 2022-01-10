@@ -15,7 +15,7 @@ class AnswerFactory extends Factory
     {
         return [
             'answer_content' => $this->faker->realText(rand(20,100),rand(1,2)),
-            'question_id' => $this->faker->numberBetween(1,200),
+            'question_id' => $this->faker->numberBetween(1,20),
             'correct' => $this->faker->numberBetween(0,1),
         ];
     }

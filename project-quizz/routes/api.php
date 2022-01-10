@@ -7,6 +7,7 @@ use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 
@@ -74,5 +75,6 @@ Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('
 //Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 
-
+Route::get('/quizzes', [QuizController::class, 'index']);
+Route::post('/quizzes', [QuizController::class, 'store']);
 

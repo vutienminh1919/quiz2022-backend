@@ -43,6 +43,7 @@ class QuestionController extends Controller
     }
     public function store(Request $request)
     {
+
         DB::beginTransaction();
         try {
             $question = new Question();

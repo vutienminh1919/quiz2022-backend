@@ -19,7 +19,7 @@ class CreateQuizzesTable extends Migration
 //            $table->unsignedBigInteger('category_id');
             $table->tinyInteger('duration')->nullable();
 //            $table->integer('questions');
-            $table->tinyInteger('published')->default(0);
+            $table->tinyInteger('published')->default(0)->nullable();
             $table->timestamps();
         });
     }

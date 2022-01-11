@@ -26,7 +26,7 @@ class QuizFormRequest extends FormRequest
         return [
             'name' => 'required | unique:quizzes',
             'duration' => 'required',
-            'published' => 'required',
+//            'published' => 'required',
         ];
     }
 }

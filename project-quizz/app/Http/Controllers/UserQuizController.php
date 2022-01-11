@@ -55,7 +55,6 @@ class UserQuizController extends Controller
         ];
         $userQuiz = $this->userQuizService->create($userQuizData);
 
-        dd($userQuiz);
         $answer_id = $request->answer_id;
         $question_id[] = $request->question_id;
         $correct = $request->correct;

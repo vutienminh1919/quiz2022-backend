@@ -78,8 +78,13 @@ Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('
 
 Route::get('/quizzes', [QuizController::class, 'index']);
 Route::post('/quizzes', [QuizController::class, 'store']);
+<<<<<<< HEAD
 Route::get('/user/{userId}/result',[QuizResultController::class,'showUserResults']);
 Route::get('/all-result/{id}',[QuizResultController::class,'showAllResults']);
+=======
+Route::get('/quizzes/{id}', [QuizController::class, 'show']);
+Route::get('/quizzes/getQuestion', [QuizController::class, 'getAllQuestion']);
+>>>>>>> 971c0d8c97a60d77cafdf6c750321c32e9ce8b16
 
 Route::get('/userQuiz/{id}',[UserQuizController::class,'index']);
 Route::post('/test',[UserQuizController::class,'doQuiz']);

@@ -29,6 +29,11 @@ class QuizService implements CRUDinterfaceService
         return ['quiz' => $quiz];
     }
 
+    public function getAllQuestion()
+    {
+       return $this->quizRepo->getAllQuestion();
+    }
+
     public function create($request)
     {
         $quiz = $this->quizRepo->create($request);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuizFormRequest;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Repositories\QuizRepo;
 use App\Services\CategoryService;
 use App\Services\QuestionService;
 use App\Services\QuizQuestionService;
@@ -19,18 +20,22 @@ class QuizController extends Controller
     protected $categoryService;
     protected $quizQuestionService;
     protected $questionService;
+    protected $quizRepo;
 
     public function __construct(
         QuizService         $quizService,
         CategoryService     $categoryService,
         QuizQuestionService $quizQuestionService,
-        QuestionService     $questionService
+        QuestionService     $questionService,
+        QuizRepo $quizRepo
     )
     {
         $this->quizService = $quizService;
         $this->categoryService = $categoryService;
         $this->quizQuestionService = $quizQuestionService;
         $this->questionService = $questionService;
+        $this->quizRepo = $quizRepo;
+
     }
 
     public function index()
@@ -63,8 +68,19 @@ class QuizController extends Controller
             ];
             return response()->json($data);
         }
+    }
 
+    public function getAllQuestion()
+    {
+        $questions = $this->questionService->getAll();
+        return response()->json($questions);
+    }
 
+    public function show($id)
+    {
+
+        $quiz = $this->quizRepo->findById($id);
+        return response()->json($quiz);
     }
 
 }

@@ -5,12 +5,14 @@ use App\Http\Controllers\AnswerController;
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuizQuestionController;
+use App\Http\Controllers\UserQuizController;
+use App\Http\Controllers\QuizResultController;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,3 +59,12 @@ Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 Route::get('/quizzes', [QuizController::class, 'index']);
 Route::post('/quizzes', [QuizController::class, 'store']);
 
+    Route::get('/doExam/{id}',[UserQuizController::class,'index'])->name('quiz.doQuiz');
+    Route::post('/',[UserQuizController::class,'doQuiz'])->name('quiz.submit');
+    Route::get('/result/{quizId}/user/{userId}',[QuizResultController::class,'showResult'])->name('quiz.result');
+
+Route::group(['middleware' => 'manager.role', 'prefix' => 'quiz-question'], function () {
+    Route::post('/store', [QuizQuestionController::class,'store'])->name('quizQuestion.store');
+    Route::get('/{id}/delete', [QuizQuestionController::class,'destroy'])->name('quizQuestion.destroy');
+    Route::post('/multiDelete', [QuizQuestionController::class,'multiDestroy'])->name('quizQuestion.multiDestroy');
+});

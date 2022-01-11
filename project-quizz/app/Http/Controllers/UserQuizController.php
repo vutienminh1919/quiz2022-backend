@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\QuizQuestionService;
+
+use App\Http\Services\QuizQuestionService;
 use App\Services\QuizResultService;
 use App\Services\QuizService;
 use App\Services\UserQuizService;
@@ -31,9 +32,10 @@ class UserQuizController extends Controller
 
     public function index($id)
     {
+        dd($id);
         $quizQuestions = $this->quizQuestionService->getQuestionsByQuizId($id);
         $quiz = $this->quizService->findById($id);
-        return view('user_quiz.detail', compact('quiz', 'quizQuestions'));
+        return response()->json($quiz);
     }
 
     public function doQuiz(Request $request)

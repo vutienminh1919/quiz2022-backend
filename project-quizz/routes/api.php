@@ -13,6 +13,8 @@ use App\Http\Controllers\QuizQuestionController;
 use App\Http\Controllers\UserQuizController;
 use App\Http\Controllers\QuizResultController;
 
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +61,7 @@ Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 Route::get('/quizzes', [QuizController::class, 'index']);
 Route::post('/quizzes', [QuizController::class, 'store']);
 
-    Route::get('/doExam/{id}',[UserQuizController::class,'index'])->name('quiz.doQuiz');
+    Route::get('/doExam/{id}',[UserQuizController::class,'index']);
     Route::post('/',[UserQuizController::class,'doQuiz'])->name('quiz.submit');
     Route::get('/result/{quizId}/user/{userId}',[QuizResultController::class,'showResult'])->name('quiz.result');
 

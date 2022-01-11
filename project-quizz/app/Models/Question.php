@@ -12,7 +12,8 @@ class Question extends Model
 
     protected $fillable = [
         "question_content",
-        "difficulty"
+        "difficulty",
+        'category_id'
     ];
 
     public function answers()

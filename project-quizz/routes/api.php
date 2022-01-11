@@ -36,7 +36,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/users',[UserController::class,'index']);
+
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/answers', [AnswerController::class, 'index']);
     Route::get('/answers/{id}', [AnswerController::class, 'show']);
@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 });
+Route::get('/users',[UserController::class,'index']);
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class, 'register']);
 

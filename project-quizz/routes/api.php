@@ -78,4 +78,6 @@ Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('
 
 Route::get('/quizzes', [QuizController::class, 'index']);
 Route::post('/quizzes', [QuizController::class, 'store']);
+Route::get('/quizzes/{id}', [QuizController::class, 'show']);
+Route::get('/quizzes/getQuestion', [QuizController::class, 'getAllQuestion']);
 

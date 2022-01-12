@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Services;
+namespace App\Http\Services;
+
 
 use App\Repositories\QuizQuestionRepo;
+use App\Services\CRUDinterfaceService;
+use App\Services\QuestionService;
 
-class QuizQuestionService implements CRUDinterfaceService
+class QuizQuestionService implements CRUDInterfaceService
 {
     protected $quizQuesRepo;
     protected $questionService;
@@ -18,6 +21,7 @@ class QuizQuestionService implements CRUDinterfaceService
     public function getAll()
     {
         $quizzes = $this->quizQuesRepo->getAll();
+
         return $quizzes;
     }
 
@@ -28,32 +32,28 @@ class QuizQuestionService implements CRUDinterfaceService
         if (!$question) {
             return 404;
         }
-        return ['question'=> $question];
+
+        return $question;
     }
 
     public function create($request)
     {
         $question = $this->quizQuesRepo->create($request);
-
-        if (!$question) {
-            return 500;
-        }
-        return ['question' => $question];
+        return $question;
     }
 
-    public function update($request, $id)
+    public function update($id, $request)
     {
         $oldQuestion = $this->quizQuesRepo->findById($id);
 
         if (!$oldQuestion) {
-            $newQuestion = null;
-            return 404;
-        } else {
-            $newQuestion = $this->quizQuesRepo->update($request, $oldQuestion);
+            if (!$oldQuestion) {
+                return 404;
+            } else {
+                return $this->quizQuesRepo->update($request, $oldQuestion);
+            }
         }
-        return [
-            'question' => $newQuestion
-        ];    }
+    }
 
     public function destroy($id)
     {
@@ -63,8 +63,9 @@ class QuizQuestionService implements CRUDinterfaceService
             return $this->quizQuesRepo->destroy($id);
         }
 
-        return 404;
+        abort(404);
     }
+
     public function getQuestionsByQuizId($id)
     {
         return $this->quizQuesRepo->getQuestionsByQuizId($id);
@@ -72,7 +73,7 @@ class QuizQuestionService implements CRUDinterfaceService
 
     public function generate($quiz, $count)
     {
-        $questions = $this->questionService->getAll();
+        $questions = $this->questionService->getQuestionsByCategoryId($quiz->category_id);
         $question_id = [];
         foreach ($questions as $value) {
             $question_id[] = $value->id;

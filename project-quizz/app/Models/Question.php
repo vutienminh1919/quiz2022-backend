@@ -11,6 +11,7 @@ class Question extends Model
     protected $table = "questions";
 
     protected $fillable = [
+      'question',
         "question_content",
         "difficulty",
         'category_id'

@@ -20,9 +20,7 @@ class QuizResultService implements CRUDinterfaceService
 
     public function findById($id)
     {
-        $quizResult = $this->quizResultRepo->findById($id);
-
-        return $quizResult;
+        return $this->quizResultRepo->findById($id);
     }
 
     public function create($request)
@@ -33,14 +31,12 @@ class QuizResultService implements CRUDinterfaceService
     public function update($id, $request)
     {
         $oldQuizResult = $this->quizResultRepo->findById($id);
-
-        return (!$oldQuizResult ? abort(404) : $this->quizResultRepo->update($request, $oldQuizResult));
+        $this->quizResultRepo->update($request, $oldQuizResult);
     }
 
     public function destroy($id)
     {
         $quizResult = $this->quizResultRepo->findById($id);
-
-        return ($quizResult ? $this->quizResultRepo->destroy($quizResult) : abort(404));
+        $this->quizResultRepo->destroy($quizResult);
     }
 }

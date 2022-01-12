@@ -8,9 +8,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
-use App\Http\Controllers\TestController;
-use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserQuizController;
+use App\Http\Controllers\QuizResultController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/answers', [AnswerController::class, 'store']);
     Route::put('/answers/{id}', [AnswerController::class, 'update']);
     Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
-
+    Route::get('/showResult/{id}/{userId}',[QuizResultController::class,'showResult']);
 });
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class, 'register']);
@@ -77,6 +78,11 @@ Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('
 
 Route::get('/quizzes', [QuizController::class, 'index']);
 Route::post('/quizzes', [QuizController::class, 'store']);
+Route::get('/user/{userId}/result',[QuizResultController::class,'showUserResults']);
+Route::get('/all-result/{id}',[QuizResultController::class,'showAllResults']);
 Route::get('/quizzes/{id}', [QuizController::class, 'show']);
 Route::get('/quizzes/getQuestion', [QuizController::class, 'getAllQuestion']);
 
+Route::get('/userQuiz/{id}',[UserQuizController::class,'index']);
+Route::post('/test',[UserQuizController::class,'doQuiz']);
+Route::get('/result/{quizId}/user/{userId}',[QuizResultController::class,'showResult']);

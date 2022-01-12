@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\QuestionFormRequest;
 use App\Http\Requests\UpdateQuestionsRequest;
 use App\Models\Answer;
+use App\Models\Category;
 use App\Models\Question;
 use App\Services\AnswerService;
 use App\Services\CategoryService;
@@ -47,6 +48,13 @@ class QuestionController extends Controller
         $data = $this->questionService->findById($id);
         return response()->json($data, 200);
     }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return response()->json($categories);
+    }
+
     public function store(Request $request)
     {
 

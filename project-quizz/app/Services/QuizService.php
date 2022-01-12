@@ -3,6 +3,7 @@
 namespace App\Services;
 
 
+
 use App\Repositories\QuizRepo;
 
 class QuizService implements CRUDinterfaceService

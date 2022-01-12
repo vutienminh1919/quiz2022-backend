@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QuizFormRequest;
+use App\Http\Services\QuizQuestionService;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Repositories\QuizRepo;
 use App\Services\CategoryService;
 use App\Services\QuestionService;
-use App\Services\QuizQuestionService;
+
 use App\Services\QuizService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,15 +56,15 @@ class QuizController extends Controller
             $quiz->questions()->sync($request->questions);
             DB::commit();
             $data = [
-                "status"=>"Success",
-                "message"=> "Them moi thanh cong"
+                "status" => "Success",
+                "message" => "Them moi thanh cong"
             ];
             return response()->json($data);
         } catch (Exception $exception) {
             DB::rollBack();
             $data = [
-                "status"=>"Error",
-                "message"=> $exception->getMessage()
+                "status" => "Error",
+                "message" => $exception->getMessage()
             ];
             return response()->json($data);
         }
@@ -87,7 +88,6 @@ class QuizController extends Controller
     {
         $quiz_questions = $this->quizQuestionService->getQuestionsByQuizId($id);
         $quiz = $this->quizService->findById($id);
-
     }
 
 }

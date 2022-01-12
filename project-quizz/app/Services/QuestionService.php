@@ -31,6 +31,7 @@ class QuestionService implements CRUDinterfaceService
         if (!$question) {
             return 404;
         }
+
 //        return ['question' => $question];
         return $question;
     }

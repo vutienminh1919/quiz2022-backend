@@ -12,14 +12,12 @@ class QuestionRepo extends EloquentRepo implements CRUDinterfaceRepo
     {
         return $this->model->with('category', 'answers')->get();
     }
-
-    public function findById($id){
-        return $this->model->with('answers')->find($id);
-    }
-
     public function getModel()
     {
         return Question::class;
+    }
+    public function findById($id){
+        return $this->model->with('answers')->find($id);
     }
     public function getQuestionsByCategoryId($category_id)
     {

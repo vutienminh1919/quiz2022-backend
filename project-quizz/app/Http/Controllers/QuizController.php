@@ -12,7 +12,6 @@ use App\Services\QuizQuestionService;
 use App\Services\QuizService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 
 class QuizController extends Controller
 {

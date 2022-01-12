@@ -10,7 +10,7 @@ class QuestionRepo extends EloquentRepo implements CRUDinterfaceRepo
 {
     public function getAll()
     {
-        return $this->model->with('category')->get();
+        return $this->model->with('category', 'answers')->get();
     }
     public function getModel()
     {

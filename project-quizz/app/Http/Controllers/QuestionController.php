@@ -36,6 +36,12 @@ class QuestionController extends Controller
 //        $answers = $this->answerService->getAll();
         return response()->json($questions);
     }
+//    public function show($id)
+//    {
+//        $data = $this->questionService->findById($id);
+//        return response()->json($data['question'], 200);
+//
+//    }
     public function show($id)
     {
         $data = $this->questionService->findById($id);

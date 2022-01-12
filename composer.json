@@ -1,0 +1,6 @@
+{
+    "require": {
+        "laravel/sanctum": "*",
+      "ext-mysql_xdevapi": "*"
+    }
+}

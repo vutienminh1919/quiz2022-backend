@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -84,3 +85,4 @@ Route::group(['middleware' => 'manager.role', 'prefix' => 'quiz-question'], func
     Route::get('/{id}/delete', [QuizQuestionController::class, 'destroy'])->name('quizQuestion.destroy');
     Route::post('/multiDelete', [QuizQuestionController::class, 'multiDestroy'])->name('quizQuestion.multiDestroy');
 });
+

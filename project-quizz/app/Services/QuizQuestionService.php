@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Http\Services;
-
+namespace App\Services;
 
 use App\Repositories\QuizQuestionRepo;
 use App\Services\CRUDinterfaceService;
@@ -12,7 +11,8 @@ class QuizQuestionService implements CRUDInterfaceService
     protected $quizQuesRepo;
     protected $questionService;
 
-    public function __construct(QuizQuestionRepo $quizQuesRepo, QuestionService $questionService)
+    public function __construct(QuizQuestionRepo $quizQuesRepo,
+                                QuestionService $questionService)
     {
         $this->quizQuesRepo = $quizQuesRepo;
         $this->questionService = $questionService;

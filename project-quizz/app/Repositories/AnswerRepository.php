@@ -9,8 +9,9 @@ class AnswerRepository
 {
     public function getAll()
     {
-        $answer = Answer::all();
-        return $answer;
+//        $answer = Answer::all();
+//        return $answer;
+        return Answer::with('question')->get();
     }
 
     public function getById($id)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -80,4 +81,18 @@ class AuthController extends Controller
             'message' => 'You have successfully logged out and the token was successfully deleted'
         ];
     }
+//    public function changePassword(Request $request)
+//    {
+//        $user = Auth::user();
+//        $currentPassword = $user->password;
+//        $request->validate([
+//            'confirmPassword' => 'required|same:newPassword',
+//        ]);
+//        if (!Hash::check($request->currentPassword, $currentPassword)) {
+//            return redirect()->back()->withErrors(['currentPassword' => 'Sai Password hiện tại ']);
+//        }
+//        $user->password = Hash::make($request->newPassword);
+//        $user->save();
+//
+//        return response()->json(['message'=> 'Thanh cong']);
 }

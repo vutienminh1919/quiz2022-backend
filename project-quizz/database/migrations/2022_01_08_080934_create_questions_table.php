@@ -16,8 +16,11 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->text('question_content');
-            $table->integer('difficulty')->default(1);
-            $table->unsignedBigInteger('category_id')->default(1);
+            $table->integer('difficulty')->nullable();
+            $table->bigInteger('category_id')->unsigned();
+
+            $table->foreign('category_id')->references('id')->on('categories');
+
             $table->timestamps();
         });
     }

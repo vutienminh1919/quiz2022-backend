@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\QuizQuestionService;
+
+use App\Http\Services\QuizQuestionService;
 use App\Services\QuizService;
 use Illuminate\Http\Request;
 

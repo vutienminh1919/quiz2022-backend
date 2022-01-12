@@ -4,9 +4,10 @@ namespace App\Services;
 
 use App\Repositories\UserQuizRepo;
 
-class UserQuizService implements CRUDinterfaceService
+class UserQuizService
 {
     protected $userQuizRepo;
+
     public function __construct(UserQuizRepo $userQuizRepo)
     {
         $this->userQuizRepo = $userQuizRepo;
@@ -19,9 +20,7 @@ class UserQuizService implements CRUDinterfaceService
 
     public function findById($id)
     {
-        $userQuiz = $this->userQuizRepo->findById($id);
-
-        return (!$userQuiz ? abort(404) : $userQuiz);
+        return $this->userQuizRepo->findById($id);
     }
 
     public function create($request)
@@ -32,15 +31,12 @@ class UserQuizService implements CRUDinterfaceService
     public function update($id, $request)
     {
         $oldUserQuiz = $this->userQuizRepo->findById($id);
-
-        return (!$oldUserQuiz ? abort(404) : $this->userQuizRepo->update($request,$oldUserQuiz));
+        $this->userQuizRepo->update($request, $oldUserQuiz);
     }
 
     public function destroy($id)
     {
         $userQuiz = $this->userQuizRepo->findById($id);
-
-        return ($userQuiz ? $this->userQuizRepo->destroy($userQuiz) : abort(404));
+        $this->userQuizRepo->destroy($userQuiz);
     }
-
 }

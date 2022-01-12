@@ -37,4 +37,6 @@ class QuizRepo extends EloquentRepo implements CRUDinterfaceRepo
     {
         return DB::table('quizzes')->latest('id')->first();
     }
+
+
 }

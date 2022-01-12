@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::prefix('/quizzes')->group(function (){
         Route::get('/', [QuizController::class, 'index']);
+        Route::get('/{id}/question-not-quiz', [QuizController::class, 'getQuestionNotOfQuiz']);
+        Route::post('/{id}/add-questions', [QuizController::class, 'addQuestionToQuiz']);
         Route::get('/{id}', [QuizController::class, 'show']);
         Route::post('/', [QuizController::class, 'store']);
 

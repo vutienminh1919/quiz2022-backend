@@ -27,7 +27,7 @@ class QuizController extends Controller
         CategoryService     $categoryService,
         QuizQuestionService $quizQuestionService,
         QuestionService     $questionService,
-        QuizRepo $quizRepo
+        QuizRepo            $quizRepo
     )
     {
         $this->quizService = $quizService;
@@ -88,6 +88,20 @@ class QuizController extends Controller
     {
         $quiz_questions = $this->quizQuestionService->getQuestionsByQuizId($id);
         $quiz = $this->quizService->findById($id);
+    }
+
+    function getQuestionNotOfQuiz($idQuiz)
+    {
+        $quiz = Quiz::find($idQuiz);
+        $questionOfQuiz = $quiz->questions()->get();
+        $questions = Question::all();
+        $questionNotOfQuiz = $questions->diff($questionOfQuiz);
+        return response()->json($questionNotOfQuiz);
+    }
+
+    function addQuestionToQuiz(Request $request, $idQuiz) {
+        $quiz = Quiz::find($idQuiz);
+        $quiz->questions()->attach($request->question_id);
     }
 
 }

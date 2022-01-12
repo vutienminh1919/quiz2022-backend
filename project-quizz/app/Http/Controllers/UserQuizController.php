@@ -29,11 +29,11 @@ class UserQuizController extends Controller
         $this->quizQuestionService = $quizQuestionService;
     }
 
-    public function index($id)
+    public function index($idQuiz)
     {
-        $quizQuestion = $this->quizQuestionService->getQuestionsByQuizId($id);
-        $quiz = $this->quizService->findById($id);
-        return response()->json([$quizQuestion,$quiz]);
+        $quizQuestion = $this->quizQuestionService->getQuestionsByQuizId($idQuiz);
+        //$quiz = $this->quizService->findById($idQuiz);
+        return response()->json($quizQuestion);
     }
 
     public function doQuiz(Request $request)
@@ -44,7 +44,6 @@ class UserQuizController extends Controller
         $ten_minutes = $now + ($duration * 60);
         $start_time = date('Y-m-d H:i:s', $now);
         $end_time = date('Y-m-d H:i:s', $ten_minutes);
-
 
         $userQuizData = [
             'user_id' => Auth::id(),
@@ -60,18 +59,18 @@ class UserQuizController extends Controller
         $correct = $request->correct;
         $answered = $request->answered;
 
-        for ($i = 0; $i < count($question_id); $i++) {
-            $quizResultData = [
-                'user_id' => Auth::id(),
-                'quiz_id' => $request->quiz_id,
-                'question_id' => $question_id[$i],
-                'answer_id' => $answer_id[$i],
-                'correct' => $correct[$i],
-                'answered' => $answered[$i],
-                'user_quiz_id' => $userQuiz->id
-            ];
-            $this->quizResultService->create($quizResultData);
-        }
+//        for ($i = 0; $i < count($question_id); $i++) {
+//            $quizResultData = [
+//                'user_id' => Auth::id(),
+//                'quiz_id' => $request->quiz_id,
+//                'question_id' => $question_id[$i],
+//                'answer_id' => $answer_id[$i],
+//                'correct' => $correct[$i],
+//                'answered' => $answered[$i],
+//                'user_quiz_id' => $userQuiz->id
+//            ];
+//            $this->quizResultService->create($quizResultData);
+//        }
         return response()->json(['quizId' => $userQuiz->id, 'userId' => Auth::id()]);
     }
 }

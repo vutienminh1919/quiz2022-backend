@@ -45,7 +45,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/answers/{id}', [AnswerController::class, 'update']);
     Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
     Route::get('/showResult/{id}/{userId}',[QuizResultController::class,'showResult']);
+
+    Route::prefix('/quizzes')->group(function () {
+        Route::get('/{id}/questions-answers', [UserQuizController::class,'index']);
+    });
+
 });
+
 Route::post('/login', [AuthController::class,'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
@@ -62,18 +68,6 @@ Route::post('/questions',[QuestionController::class,'store'])->name('questions.s
 Route::get('/questions/{id}',[QuestionController::class, 'show'])->name('questions.show');
 Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
 Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
-
-//
-//Route::get('/tests', [TestController::class, 'index'])->name('tests.all');
-//Route::get('/tests/{testId}', [TestController::class, 'getById']);
-//
-//Route::post('/tests', [TestController::class, 'store'])->name('tests.store');
-//Route::put('/tests/{testId}', [TestController::class, 'update'])->name('tests.update');
-//Route::delete('/tests/{testId}', [TestController::class, 'destroy'])->name('tests.destroy');
-//Route::get('/testsbyquestion/{id}', [TestController::class, 'getAllTestByQuestion']);
-//Route::get('/questionsbytest/{id}', [TestController::class, 'getAllQuestionByTest']);
-//
-//Route::delete('/answers/{id}', [AnswerController::class, 'destroy']);
 
 
 Route::get('/quizzes', [QuizController::class, 'index']);

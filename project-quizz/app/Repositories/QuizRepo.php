@@ -9,6 +9,7 @@ use App\Models\Question;
 use App\Models\Quiz;
 use App\Repositories\Eloquent\EloquentRepo;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\This;
 
 class QuizRepo extends EloquentRepo implements CRUDinterfaceRepo
 {
@@ -23,8 +24,7 @@ class QuizRepo extends EloquentRepo implements CRUDinterfaceRepo
 
     public function findById($id)
     {
-        return $quiz = Quiz::with('questions')->find($id);
-
+        return $this->model->with('questions')->find($id);
     }
 
     public function getAllQuestion()

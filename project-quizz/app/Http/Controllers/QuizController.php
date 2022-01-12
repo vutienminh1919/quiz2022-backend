@@ -51,7 +51,7 @@ class QuizController extends Controller
             $quiz = new Quiz();
             $quiz->name = $request->name;
             $quiz->duration = $request->duration;
-            $quiz->published = $request->published;
+//            $quiz->published = $request->published;
             $quiz->save();
             $quiz->questions()->sync($request->questions);
             DB::commit();
@@ -81,6 +81,14 @@ class QuizController extends Controller
 
         $quiz = $this->quizRepo->findById($id);
         return response()->json($quiz);
+
+    }
+
+    public function edit($id)
+    {
+        $quiz_questions = $this->quizQuestionService->getQuestionsByQuizId($id);
+        $quiz = $this->quizService->findById($id);
+
     }
 
 }

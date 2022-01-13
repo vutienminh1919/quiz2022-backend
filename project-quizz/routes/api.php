@@ -5,8 +5,11 @@ use App\Http\Controllers\AnswerController;
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ResetPwdReqController;
+use App\Http\Controllers\UpdatePwdController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuizQuestionController;
 use App\Http\Controllers\UserQuizController;
@@ -29,6 +32,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::prefix('/answers')->group(function () {
@@ -86,3 +91,5 @@ Route::group(['middleware' => 'manager.role', 'prefix' => 'quiz-question'], func
     Route::post('/multiDelete', [QuizQuestionController::class, 'multiDestroy'])->name('quizQuestion.multiDestroy');
 });
 
+Route::post('/req-password-reset', [ResetPwdReqController::class, 'reqForgotPassword']);
+Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);

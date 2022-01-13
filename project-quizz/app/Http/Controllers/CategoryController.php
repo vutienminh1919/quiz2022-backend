@@ -44,12 +44,11 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        if ($this->categoryService->isUsedCategoryInQuestionTable($id) || $this->categoryService->isUsedCategoryInQuizTable($id)) {
-            return response()->json(['message' => 'Category already has Questions or Quizzes.', 'error' => 'error'],);
-        } else {
+//        if ($this->categoryService->isUsedCategoryInQuestionTable($id) || $this->categoryService->isUsedCategoryInQuizTable($id)) {
+//            return response()->json(['message' => 'Category already has Questions or Quizzes.', 'error' => 'error'],);
+//        } else {
             $this->categoryService->destroy($id);
             return response()->json(['message' => 'Xóa thành công'], 200);
-        }
     }
 
 
